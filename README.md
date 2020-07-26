@@ -1,4 +1,4 @@
-# Webpack Configuration
+# Webpack Configuration File
 
 **webpack.config.js(Basic)**
 
@@ -57,6 +57,34 @@ module.exports = {
     ]
   }
   // ... some codes ...
+}
+```
+
+#### 分离CSS
+
+Plugin: `mini-css-extract-plugin`
+
+Configuration:
+
+```javascript
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+  ],
 }
 ```
 
@@ -121,6 +149,44 @@ module.exports = {
   }
 }
 ```
+
+### Development Environment
+
+1. Mode
+
+   ```javascript
+   module.exports = {
+     // ... some code ...
+     mode: "development"
+     // ... some code ...
+   }
+   ```
+
+2. Dev server
+
+   需要安装`webpack-dev-server` 
+
+   ```javascript
+   const path = require('path')
+   
+   module.exports = {
+     devServer: {
+       contentBase: path.resolve(__dirname, 'dist'),
+       compress: true,
+       port: 8000,
+   	}
+   }
+   ```
+
+3. Source map
+
+   ```javascript
+   module.exports = {
+     devtool: 'source-map'
+   }
+   ```
+
+### Production Environment
 
 ## Pitfalls
 
